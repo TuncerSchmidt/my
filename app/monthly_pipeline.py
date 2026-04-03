@@ -7,6 +7,7 @@ import threading
 from openpyxl.styles import PatternFill
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill, Border, Side
+from openpyxl.styles.fills import Fill, PatternFill
 
 from app.read_excel_file import process_excel
 from app.read_pdf_file import process_pdf
@@ -365,12 +366,11 @@ def process_final(procare_file, dhs_file, auth_file):
     # ===== AUTO COLUMN WIDTH =====
     auto_adjust_column_width(ws, padding=4)
 
-    # # Fix for Python 3.14 + openpyxl compatibility
-    # from openpyxl.styles.fills import Fill
-    # wb._fills = [
-    #     f if isinstance(f, Fill) else PatternFill()
-    #     for f in wb._fills
-    # ]
+    # Fix for Python 3.14 + openpyxl compatibility
+    wb._fills = [
+        f if isinstance(f, Fill) else PatternFill()
+        for f in wb._fills
+    ]
 
     final_output = io.BytesIO()
     wb.save(final_output)
