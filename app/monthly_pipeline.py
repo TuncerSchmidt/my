@@ -365,6 +365,13 @@ def process_final(procare_file, dhs_file, auth_file):
     # ===== AUTO COLUMN WIDTH =====
     auto_adjust_column_width(ws, padding=4)
 
+    # # Fix for Python 3.14 + openpyxl compatibility
+    # from openpyxl.styles.fills import Fill
+    # wb._fills = [
+    #     f if isinstance(f, Fill) else PatternFill()
+    #     for f in wb._fills
+    # ]
+
     final_output = io.BytesIO()
     wb.save(final_output)
     final_output.seek(0)
