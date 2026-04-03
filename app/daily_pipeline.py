@@ -373,6 +373,7 @@ def run_pipeline(
     
     auto_adjust_column_width(ws, padding=4)
 
+    ## Fix for Python 3.14 + openpyxl compatibility
     # from openpyxl.styles.fills import Fill, PatternFill
 
     # wb._fills = [
